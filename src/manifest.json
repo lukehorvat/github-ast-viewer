@@ -8,5 +8,8 @@
   "content_scripts": [{
     "matches": ["*://*.github.com/*"],
     "js": ["content-script.js"]
-  }]
+  }],
+  "permissions": [
+    "https://raw.githubusercontent.com/"
+  ]
 }
