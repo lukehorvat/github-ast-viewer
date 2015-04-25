@@ -6,11 +6,9 @@
   "author": "Luke Horvat",
   "homepage_url": "https://github.com/lukehorvat/github-ast-viewer",
   "content_scripts": [{
-    "matches": ["https://github.com/*"],
+    "matches": ["*://*.github.com/*"],
     "js": ["content-script.js"],
     "css": ["content-script.css"]
   }],
-  "permissions": [
-    "https://raw.githubusercontent.com/*"
-  ]
+  "permissions": ["*://*.githubusercontent.com/*"]
 }

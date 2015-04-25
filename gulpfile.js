@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var jsonminify = require("gulp-jsonminify");
 var less = require("gulp-less");
 var minifyCSS = require("gulp-minify-css");
 var rename = require("gulp-rename");
@@ -39,6 +40,7 @@ gulp.task("build-content-script-css", function() {
 gulp.task("build-manifest", function() {
   return gulp
     .src(sourceDir + "/manifest.json")
+    .pipe(jsonminify())
     .pipe(gulp.dest(buildDir));
 });
 
