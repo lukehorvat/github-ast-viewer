@@ -17,8 +17,8 @@ gulp.task("clean", function(done) {
   rimraf(buildDir, done);
 });
 
-gulp.task("build-js", function() {
-  return browserify("./" + sourceDir + "/main.js")
+gulp.task("build-content-script-js", function() {
+  return browserify("./" + sourceDir + "/content-script/index.js")
     .transform(babelify)
     .bundle()
     .pipe(source("content-script.js")) // Convert from Browserify stream to vinyl stream.
@@ -27,9 +27,9 @@ gulp.task("build-js", function() {
     .pipe(gulp.dest(buildDir));
 });
 
-gulp.task("build-css", function() {
+gulp.task("build-content-script-css", function() {
   return gulp
-    .src(sourceDir + "/main.less")
+    .src(sourceDir + "/content-script/index.less")
     .pipe(less())
     .pipe(minifyCSS())
     .pipe(rename("content-script.css"))
@@ -43,7 +43,7 @@ gulp.task("build-manifest", function() {
 });
 
 gulp.task("build", ["clean"], function(done) {
-  runSequence(["build-js", "build-css", "build-manifest"], done);
+  runSequence(["build-content-script-js", "build-content-script-css", "build-manifest"], done);
 });
 
 gulp.task("watch", ["build"], function() {

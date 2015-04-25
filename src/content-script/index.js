@@ -22,7 +22,7 @@ ghInjection(window, (err) => {
   }
 
   // Is the AST button already injected for this file?
-  let astButton = $("#ast");
+  let astButton = $("#view-ast");
   if (astButton.length > 0) {
     return;
   }
@@ -33,13 +33,13 @@ ghInjection(window, (err) => {
   .clone()
   .text("AST")
   .attr("href", "#")
-  .attr("id", "ast")
+  .attr("id", "view-ast")
   .insertBefore(rawButton)
   .click(() => {
     $.get(rawButton.attr("href"))
     .done(data => {
       let ast = esprima.parse(data);
-      let containerElement = $(".blob-wrapper").empty();
+      let containerElement = $("<div />", { id: "ast" }).appendTo($(".blob-wrapper").empty());
       renderAST(ast, containerElement);
     })
     .fail((jqXHR, textStatus) => {
@@ -56,9 +56,9 @@ function renderAST(ast, containerElement) {
       let parentContainerElement = parent ? nodeElements.get(parent).children(".children") : containerElement;
 
       let nodeElement = $("<div />", { class: "node" }).appendTo(parentContainerElement);
-      let typeElement = $("<span />", { class: "type", text: node.type }).appendTo(nodeElement);
+      let typeElement = $("<div />", { class: "type", text: node.type }).appendTo(nodeElement);
       let childrenElement = $("<div />", { class: "children" }).hide().appendTo(nodeElement);
-      typeElement.click(() => childrenElement.fadeToggle());
+      typeElement.click(() => childrenElement.fadeToggle("fast"));
 
       nodeElements.set(node, nodeElement);
       console.log(node, parent);
