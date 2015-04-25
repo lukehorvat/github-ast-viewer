@@ -1,8 +1,9 @@
 import "babelify/polyfill";
-import $ from "jquery";
+import esprima from "esprima";
+import estraverse from "estraverse";
 import gitHubInjection from "github-injection";
 import githubPageType from "github-page-type";
-import esprima from "esprima";
+import $ from "jquery";
 
 gitHubInjection(window, (err) => {
   if (err) {
@@ -38,10 +39,19 @@ gitHubInjection(window, (err) => {
     $.get(rawButton.attr("href"))
     .done(data => {
       let ast = esprima.parse(data);
-      console.log(ast);
+      let container = $(".blob-wrapper").empty();
+      renderAST(ast, container);
     })
     .fail((jqXHR, textStatus) => {
       console.log("error", jqXHR, textStatus);
     });
   });
 });
+
+function renderAST(ast, container) {
+  estraverse.traverse(ast, {
+    enter: (node, parent) => {
+      $("<div />", { text: node.type }).appendTo(container);
+    }
+  });
+};

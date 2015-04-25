@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "esprima": "2.2.0",
+    "estraverse": "4.0.0",
     "github-injection": "0.1.0",
     "github-page-type": "0.1.0",
     "jquery": "2.1.3"
