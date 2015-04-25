@@ -1,15 +1,15 @@
 {
   "manifest_version": 2,
-  "name": "github-ast-viewer",
+  "name": "GitHub AST Viewer",
   "version": "0.0.0",
-  "description": "",
+  "description": "View the abstract syntax tree (AST) of code on GitHub.",
   "author": "Luke Horvat",
   "homepage_url": "https://github.com/lukehorvat/github-ast-viewer",
   "content_scripts": [{
-    "matches": ["*://*.github.com/*"],
+    "matches": ["https://github.com/*"],
     "js": ["content-script.js"]
   }],
   "permissions": [
-    "https://raw.githubusercontent.com/"
+    "https://raw.githubusercontent.com/*"
   ]
 }

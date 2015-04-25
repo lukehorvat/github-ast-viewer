@@ -1,5 +1,6 @@
 {
   "name": "github-ast-viewer",
+  "description": "View the abstract syntax tree (AST) of code on GitHub.",
   "private": true,
   "dependencies": {
     "esprima": "2.2.0",
