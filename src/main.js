@@ -58,11 +58,7 @@ function renderAST(ast, containerElement) {
       let nodeElement = $("<div />", { class: "node" }).appendTo(parentContainerElement);
       let typeElement = $("<span />", { class: "type", text: node.type }).appendTo(nodeElement);
       let childrenElement = $("<div />", { class: "children" }).hide().appendTo(nodeElement);
-      typeElement.click(() => childrenElement.toggle());
-
-      // TODO: Move the following CSS to a stylesheet.
-      nodeElement.css({ paddingLeft: "15px", borderLeft: "1px dashed #ddd" });
-      typeElement.css({ fontFamily: "Consolas, Menlo, Courier, monospace", cursor: "pointer" });
+      typeElement.click(() => childrenElement.fadeToggle());
 
       nodeElements.set(node, nodeElement);
       console.log(node, parent);
