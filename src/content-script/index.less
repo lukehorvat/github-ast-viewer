@@ -17,4 +17,21 @@
       padding-left: 15px;
     }
   }
+
+  .load-in-progress {
+    text-align: center;
+
+    &::before {
+      content: "Loading AST...";
+    }
+  }
+
+  .load-failed {
+    text-align: center;
+    color: #900;
+
+    &::before {
+      content: "Failed to load AST.";
+    }
+  }
 }
