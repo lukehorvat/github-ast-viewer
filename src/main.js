@@ -1,17 +1,17 @@
 import "babelify/polyfill";
 import esprima from "esprima";
 import estraverse from "estraverse";
-import gitHubInjection from "github-injection";
-import githubPageType from "github-page-type";
+import ghInjection from "github-injection";
+import ghPageType from "github-page-type";
 import $ from "jquery";
 
-gitHubInjection(window, (err) => {
+ghInjection(window, (err) => {
   if (err) {
     return;
   }
 
   // Is the current GitHub page a file in a repository?
-  if (!githubPageType(window.location.href, githubPageType.REPOSITORY_BLOB)) {
+  if (!ghPageType(window.location.href, ghPageType.REPOSITORY_BLOB)) {
     return;
   }
 
@@ -56,12 +56,13 @@ function renderAST(ast, containerElement) {
       let parentContainerElement = parent ? nodeElements.get(parent).children(".children") : containerElement;
 
       let nodeElement = $("<div />", { class: "node" }).appendTo(parentContainerElement);
-      let typeElement = $("<div />", { class: "type", text: node.type }).appendTo(nodeElement);
-      let childrenElement = $("<div />", { class: "children" }).appendTo(nodeElement);
+      let typeElement = $("<span />", { class: "type", text: node.type }).appendTo(nodeElement);
+      let childrenElement = $("<div />", { class: "children" }).hide().appendTo(nodeElement);
+      typeElement.click(() => childrenElement.toggle());
 
       // TODO: Move the following CSS to a stylesheet.
       nodeElement.css({ paddingLeft: "15px", borderLeft: "1px dashed #ddd" });
-      typeElement.css({ fontFamily: "Consolas, Menlo, Courier, monospace" });
+      typeElement.css({ fontFamily: "Consolas, Menlo, Courier, monospace", cursor: "pointer" });
 
       nodeElements.set(node, nodeElement);
       console.log(node, parent);
