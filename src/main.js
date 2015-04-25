@@ -39,8 +39,8 @@ gitHubInjection(window, (err) => {
     $.get(rawButton.attr("href"))
     .done(data => {
       let ast = esprima.parse(data);
-      let container = $(".blob-wrapper").empty();
-      renderAST(ast, container);
+      let containerElement = $(".blob-wrapper").empty();
+      renderAST(ast, containerElement);
     })
     .fail((jqXHR, textStatus) => {
       console.log("error", jqXHR, textStatus);
@@ -48,10 +48,23 @@ gitHubInjection(window, (err) => {
   });
 });
 
-function renderAST(ast, container) {
+function renderAST(ast, containerElement) {
+  let nodeElements = new Map();
+
   estraverse.traverse(ast, {
     enter: (node, parent) => {
-      $("<div />", { text: node.type }).appendTo(container);
+      let parentContainerElement = parent ? nodeElements.get(parent).children(".children") : containerElement;
+
+      let nodeElement = $("<div />", { class: "node" }).appendTo(parentContainerElement);
+      let typeElement = $("<div />", { class: "type", text: node.type }).appendTo(nodeElement);
+      let childrenElement = $("<div />", { class: "children" }).appendTo(nodeElement);
+
+      // TODO: Move the following CSS to a stylesheet.
+      nodeElement.css({ paddingLeft: "15px", borderLeft: "1px dashed #ddd" });
+      typeElement.css({ fontFamily: "Consolas, Menlo, Courier, monospace" });
+
+      nodeElements.set(node, nodeElement);
+      console.log(node, parent);
     }
   });
 };
