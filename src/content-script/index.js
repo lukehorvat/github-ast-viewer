@@ -21,16 +21,16 @@ ghInjection(window, (err) => {
     return;
   }
 
-  // Is the toggle button already injected for this file?
+  // Is the toggle button already injected on the page for this file?
   let toggleButton = $("#toggle-ast");
   if (toggleButton.length > 0) {
     return;
   }
 
   let fileElement = $(".file");
+  let astElement = $("<div />", { id: "ast" }).hide().appendTo(fileElement);
   let codeElement = fileElement.find(".blob-wrapper");
   let rawButton = fileElement.find("#raw-url");
-  let astElement = $("<div />", { id: "ast" }).hide().appendTo(fileElement);
 
   // Inject the toggle button into the page.
   toggleButton = rawButton

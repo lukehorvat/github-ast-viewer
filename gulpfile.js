@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var imageResize = require("gulp-image-resize");
 var jsonminify = require("gulp-jsonminify");
 var less = require("gulp-less");
 var minifyCSS = require("gulp-minify-css");
@@ -37,6 +38,20 @@ gulp.task("build-content-script-css", function() {
     .pipe(gulp.dest(buildDir));
 });
 
+gulp.task("build-icon", function() {
+  return gulp
+    .src(sourceDir + "/icon.png")
+    .pipe(imageResize({ width: 128, height: 128, crop: true }))
+    .pipe(rename("icon128.png"))
+    .pipe(gulp.dest(buildDir))
+    .pipe(imageResize({ width: 48, height: 48, crop: true }))
+    .pipe(rename("icon48.png"))
+    .pipe(gulp.dest(buildDir))
+    .pipe(imageResize({ width: 16, height: 16, crop: true }))
+    .pipe(rename("icon16.png"))
+    .pipe(gulp.dest(buildDir));
+});
+
 gulp.task("build-manifest", function() {
   return gulp
     .src(sourceDir + "/manifest.json")
@@ -45,7 +60,7 @@ gulp.task("build-manifest", function() {
 });
 
 gulp.task("build", ["clean"], function(done) {
-  runSequence(["build-content-script-js", "build-content-script-css", "build-manifest"], done);
+  runSequence(["build-content-script-js", "build-content-script-css", "build-icon", "build-manifest"], done);
 });
 
 gulp.task("watch", ["build"], function() {
