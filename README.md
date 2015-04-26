@@ -1,4 +1,4 @@
-# GitHub AST Viewer
+# GitHub AST Viewer [![Version](https://img.shields.io/github/release/lukehorvat/github-ast-viewer.svg?style=flat-square)](https://github.com/lukehorvat/github-ast-viewer/releases)
 
 Google Chrome extension to view the abstract syntax tree (AST) of code on GitHub.
 
