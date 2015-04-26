@@ -5,11 +5,18 @@
     .type {
       padding: 2px 4px;
       font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-      cursor: pointer;
 
       &:hover {
         background-color: #f7f7f7;
         border-radius: 4px;
+
+        &.branch {
+          cursor: pointer;
+        }
+
+        &.leaf {
+          cursor: default;
+        }
       }
 
       .value, .name {
