@@ -2,7 +2,7 @@
 
 Google Chrome extension to view the abstract syntax tree (AST) of code on GitHub.
 
-Currently only JavaScript code is supported, but more language support to come in the future.
+Currently only JavaScript code is supported, but more language support to come in the future!
 
 ## Installation
 
@@ -20,8 +20,14 @@ The extension adds an **AST** button to the GitHub page of any file in a reposit
 
 All contributions are welcome.
 
-Execute `npm install` to fetch the dependencies, and `npm start` to auto-build the extension while you work. Once you've committed your changes using Git, just open a pull request.
+After cloning the repository using Git, execute `npm install` to fetch the dependencies, and `npm start` to auto-build the extension while you work. Once you've committed your changes, just open a pull request on GitHub.
+
+In particular, a few things I'd like help with:
+
+- Adding support for more programming languages. This isn't easy, because all parsing has to be done in the browser via JavaScript, which drastically reduces our choice of parsers. So if you know of any robust JavaScript-based parsers for other languages (that are as good as [Esprima](https://github.com/jquery/esprima)), let me know.
+- Implementing handling of GitHub Gists.
+- Investigating feasibility of AST *editing* via the GitHub interface. [Woah](http://i.imgur.com/dOr884t.gif).
 
 ## Disclaimer
 
-This extension is not officially affiliated with GitHub in any way. Use at own risk.
+The extension is not officially affiliated with GitHub in any way. Use at own risk.
