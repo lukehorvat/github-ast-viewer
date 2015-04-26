@@ -72,6 +72,16 @@ function renderAST(ast, astElement) {
       let nodeElement = $("<div />", { class: "node" }).appendTo(parentElement);
       let typeElement = $("<div />", { class: "type", text: node.type }).appendTo(nodeElement);
       let childrenElement = $("<div />", { class: "children" }).hide().appendTo(nodeElement);
+
+      switch (node.type) {
+        case "Literal":
+          $("<span />", { class: "value", text: node.value }).appendTo(typeElement);
+          break;
+        case "Identifier":
+          $("<span />", { class: "name", text: node.name }).appendTo(typeElement);
+          break;
+      }
+
       typeElement.click(() => childrenElement.fadeToggle("fast"));
       nodeElements.set(node, nodeElement);
     }
