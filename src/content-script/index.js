@@ -6,34 +6,26 @@ import ghPageType from "github-page-type";
 import $ from "jquery";
 
 ghInjection(window, (err) => {
-  if (err) {
-    return;
-  }
+  !err &&
 
   // Is the current GitHub page a file in a repository?
-  if (!ghPageType(window.location.href, ghPageType.REPOSITORY_BLOB)) {
-    return;
-  }
+  ghPageType(window.location.href, ghPageType.REPOSITORY_BLOB) &&
 
   // Is the file written in a supported language?
-  let file = $(".final-path").text();
-  if (!file.endsWith(".js")) {
-    return;
-  }
+  $(".final-path").text().endsWith(".js") &&
 
   // Is the toggle button already injected on the page for this file?
-  let toggleButton = $("#toggle-ast");
-  if (toggleButton.length > 0) {
-    return;
-  }
+  $("#toggle-ast").length <= 0 &&
 
+  renderToggleButton();
+});
+
+function renderToggleButton() {
   let fileElement = $(".file");
   let astElement = $("<div />", { id: "ast" }).hide().appendTo(fileElement);
   let codeElement = fileElement.find(".blob-wrapper");
   let rawButton = fileElement.find("#raw-url");
-
-  // Inject the toggle button into the page.
-  toggleButton = rawButton
+  let toggleButton = rawButton
   .clone()
   .text("AST")
   .attr("href", "#")
@@ -61,7 +53,7 @@ ghInjection(window, (err) => {
       toggleButton.text("AST");
     }
   });
-});
+};
 
 function renderAST(ast, astElement) {
   let nodeElements = new Map();

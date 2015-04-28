@@ -24,7 +24,7 @@ After cloning the repository using Git, execute `npm install` to fetch the depen
 
 In particular, a few things I'd like help with:
 
-- Adding support for more programming languages. This isn't easy, because all parsing has to be done in the browser via JavaScript, which drastically reduces our choice of parsers. So if you know of any robust JavaScript-based parsers for other languages (that are as good as [Esprima](https://github.com/jquery/esprima)), let me know.
+- Adding support for more programming languages. This isn't easy, because all parsing has to be done in the web browser via JavaScript, which drastically reduces our choice of parsers. So if you know of any robust JavaScript-based parsers for other languages (that are as good as [Esprima](https://github.com/jquery/esprima)), let me know.
 - Implementing handling of GitHub Gists.
 - Investigating feasibility of AST *editing* via the GitHub interface. [Woah](http://i.imgur.com/dOr884t.gif).
 
