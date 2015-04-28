@@ -43,7 +43,13 @@ function renderToggleButton() {
 
         $.get(rawButton.attr("href"))
         .always(() => astElement.empty())
-        .done(data => renderAST(esprima.parse(data), astElement))
+        .then(data => {
+          let deferred = $.Deferred();
+          try { deferred.resolve(esprima.parse(data)) }
+          catch (err) { deferred.reject(err) }
+          return deferred.promise();
+        })
+        .done(ast => renderAST(ast, astElement))
         .fail(() => $("<p />", { class: "load-failed" }).appendTo(astElement));
       }
     }
