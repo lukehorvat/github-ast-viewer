@@ -45,8 +45,16 @@ function renderToggleButton() {
         .always(() => astElement.empty())
         .then(data => {
           let deferred = $.Deferred();
-          try { deferred.resolve(esprima.parse(data)) }
-          catch (err) { deferred.reject(err) }
+
+          // JavaScript has a different grammar depending on the source type,
+          // and each one requires a separate parsing approach. Since we don't
+          // know the source type, just attempt all of them.
+          try { deferred.resolve(esprima.parse(data, { sourceType: "module" })) }
+          catch (err) {
+            try { deferred.resolve(esprima.parse(data, { sourceType: "script" })) }
+            catch (err) { deferred.reject(err) }
+          }
+
           return deferred.promise();
         })
         .done(ast => renderAST(ast, astElement))
