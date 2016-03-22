@@ -1,4 +1,4 @@
-import "babelify/polyfill";
+import "babel-polyfill";
 import esprima from "esprima";
 import estraverse from "estraverse";
 import ghInjection from "github-injection";
