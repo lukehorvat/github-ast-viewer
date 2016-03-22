@@ -10,7 +10,8 @@
   "devDependencies": {
     "babelify": "6.0.2",
     "browserify": "9.0.8",
-    "gulp": "3.8.11",
+    "del": "2.2.0",
+    "gulp": "3.9.1",
     "gulp-image-resize": "0.6.0",
     "gulp-jsonminify": "1.0.0",
     "gulp-less": "3.0.3",
@@ -18,7 +19,6 @@
     "gulp-rename": "1.2.2",
     "gulp-uglify": "1.2.0",
     "gulp-watch": "4.2.4",
-    "rimraf": "2.3.2",
     "run-sequence": "1.1.0",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0"
