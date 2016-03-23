@@ -65,7 +65,7 @@ gulp.task("build", ["clean"], done => {
 });
 
 gulp.task("watch", ["build"], () => {
-  return watch(sourceDir, () => { gulp.start("build") });
+  return watch(`${sourceDir}/**/*`, () => { runSequence("build") });
 });
 
 gulp.task("default", ["build"]);

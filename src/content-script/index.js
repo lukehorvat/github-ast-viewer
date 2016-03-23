@@ -5,7 +5,7 @@ import ghInjection from "github-injection";
 import ghPageType from "github-page-type";
 import $ from "jquery";
 
-ghInjection(window, (err) => {
+ghInjection(window, err => {
   !err &&
 
   // Is the current GitHub page a file in a repository?
@@ -67,7 +67,7 @@ function renderToggleButton() {
       toggleButton.text("AST");
     }
   });
-};
+}
 
 function renderAST(ast, astElement) {
   let nodeElements = new Map();
@@ -94,4 +94,4 @@ function renderAST(ast, astElement) {
       }
     }
   });
-};
+}
