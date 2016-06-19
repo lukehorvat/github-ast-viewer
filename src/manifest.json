@@ -11,9 +11,9 @@
     "128": "icon128.png"
   },
   "content_scripts": [{
-    "matches": ["*://*.github.com/*"],
+    "matches": ["https://*.github.com/*"],
     "js": ["content-script.js"],
     "css": ["content-script.css"]
   }],
-  "permissions": ["*://*.githubusercontent.com/*"]
+  "permissions": ["https://*.githubusercontent.com/*"]
 }

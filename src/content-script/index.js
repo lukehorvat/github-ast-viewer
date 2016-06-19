@@ -41,7 +41,7 @@ function renderToggleButton() {
       if (astElement.children().length <= 0) {
         $("<p />", { class: "load-in-progress" }).appendTo(astElement);
 
-        $.get(rawButton.attr("href"))
+        $.get(getRawUrl(rawButton.attr("href")))
         .always(() => astElement.empty())
         .then(data => {
           let deferred = $.Deferred();
@@ -94,4 +94,13 @@ function renderAST(ast, astElement) {
       }
     }
   });
+}
+
+function getRawUrl(path) {
+  let segments = path.split("/");
+  let author = segments[1];
+  let repo = segments[2];
+  let branch = segments[4];
+  let file = segments.slice(5).join("/");
+  return `https://raw.githubusercontent.com/${author}/${repo}/${branch}/${file}`;
 }
