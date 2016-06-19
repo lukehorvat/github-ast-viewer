@@ -41,32 +41,14 @@ function renderToggleButton() {
       if (astElement.children().length <= 0) {
         $("<div />", { class: "load-in-progress" }).appendTo(astElement);
 
-        $.get(getRawUrl(rawButton.attr("href")))
+        $.get(getSourceUrl(rawButton.attr("href")))
         .always(() => astElement.empty())
-        .then(data => {
-          let deferred = $.Deferred();
-
-          // JavaScript has a different grammar depending on the source type,
-          // and each one requires a separate parsing approach. Since we don't
-          // know the source type, just attempt all of them.
-          try {
-            deferred.resolve(esprima.parse(data, { sourceType: "script" }));
-          }
-          catch (err) {
-            try {
-              console.error(err);
-              deferred.resolve(esprima.parse(data, { sourceType: "module" }));
-            }
-            catch (err) {
-              console.error(err);
-              deferred.reject(err);
-            }
-          }
-
-          return deferred.promise();
-        })
+        .then(data => parseSource(data))
         .done(ast => renderAST(ast, astElement))
-        .fail(() => $("<div />", { class: "load-failed" }).appendTo(astElement));
+        .fail(err => {
+          console.error(err);
+          $("<div />", { class: "load-failed" }).appendTo(astElement);
+        });
       }
     }
     else {
@@ -104,7 +86,19 @@ function renderAST(ast, astElement) {
   });
 }
 
-function getRawUrl(path) {
+function parseSource(code) {
+  // JavaScript has a different grammar depending on the source type,
+  // and each one requires a separate parsing approach. Since we don't
+  // know the source type, just attempt all of them.
+  try {
+    return esprima.parse(code, { sourceType: "script" });
+  }
+  catch (err) {
+    return esprima.parse(code, { sourceType: "module" });
+  }
+}
+
+function getSourceUrl(path) {
   let segments = path.split("/");
   let author = segments[1];
   let repo = segments[2];
