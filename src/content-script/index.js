@@ -39,7 +39,7 @@ function renderToggleButton() {
 
       // Has the file's AST been rendered yet? If not, do it now.
       if (astElement.children().length <= 0) {
-        $("<p />", { class: "load-in-progress" }).appendTo(astElement);
+        $("<div />", { class: "load-in-progress" }).appendTo(astElement);
 
         $.get(getRawUrl(rawButton.attr("href")))
         .always(() => astElement.empty())
@@ -58,7 +58,7 @@ function renderToggleButton() {
           return deferred.promise();
         })
         .done(ast => renderAST(ast, astElement))
-        .fail(() => $("<p />", { class: "load-failed" }).appendTo(astElement));
+        .fail(() => $("<div />", { class: "load-failed" }).appendTo(astElement));
       }
     }
     else {
