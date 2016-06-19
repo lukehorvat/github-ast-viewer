@@ -39,15 +39,20 @@ function renderToggleButton() {
 
       // Has the file's AST been rendered yet? If not, do it now.
       if (astElement.children().length <= 0) {
-        $("<div />", { class: "load-in-progress" }).appendTo(astElement);
+        $("<div />", {
+          class: "load-in-progress",
+          text: "Loading abstract syntax tree..."
+        }).appendTo(astElement);
 
         $.get(getSourceUrl(rawButton.attr("href")))
         .always(() => astElement.empty())
         .then(data => parseSource(data))
         .done(ast => renderAST(ast, astElement))
         .fail(err => {
-          console.error(err);
-          $("<div />", { class: "load-failed" }).appendTo(astElement);
+          $("<div />", {
+            class: "load-failed",
+            text: `Failed to load abstract syntax tree. (Error = "${err.message}")`
+          }).appendTo(astElement);
         });
       }
     }
