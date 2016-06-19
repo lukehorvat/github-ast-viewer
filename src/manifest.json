@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GitHub AST Viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "View the abstract syntax tree (AST) of code on GitHub.",
   "author": "Luke Horvat",
   "homepage_url": "https://github.com/lukehorvat/github-ast-viewer",
