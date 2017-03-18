@@ -2,7 +2,7 @@
   "private": true,
   "dependencies": {
     "babel-polyfill": "6.9.1",
-    "esprima": "2.7.2",
+    "esprima": "2.2.0",
     "estraverse": "4.2.0",
     "github-injection": "0.2.0",
     "github-page-type": "0.1.1",
